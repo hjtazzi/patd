@@ -1,0 +1,18 @@
+{
+  "name": "ui-web-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "watch": "esbuild ./index.js --bundle --outfile=dist/main.js --target=es6 --loader:.html=text --watch",
+    "build": "esbuild ./index.js --bundle --sourcemap --minify --outfile=build/main.js --target=es6 --loader:.html=text"
+  },
+  "author": "Hojjat Azizi",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.15.5"
+  }
+}
