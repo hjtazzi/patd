@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "watch": "esbuild ./index.js --bundle --outfile=dist/main.js --target=es6 --loader:.html=text --watch",
-    "build": "esbuild ./index.js --bundle --sourcemap --minify --outfile=build/main.js --target=es6 --loader:.html=text"
+    "watch": "esbuild ./src/index.js --bundle --outfile=dist/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --watch",
+    "build": "esbuild ./src/index.js --bundle --minify --outfile=build/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --sourcemap"
   },
   "author": "Hojjat Azizi",
   "license": "ISC",
