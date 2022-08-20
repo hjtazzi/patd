@@ -13,15 +13,20 @@ $header-height: 4.25rem;
   z-index: 999;
   border-bottom: 1px solid var(--gray-400);
 
+  @media (max-width: 767.8px) {
+    padding: .5rem;
+  }
+
   $widthAsideBtn: math.div($header-height, 1.5);
   $heightAsideBtn: $widthAsideBtn;
+
   .collapseNavbarAsideBtn {
     position: relative;
     display: flex;
     width: $widthAsideBtn;
     height: $heightAsideBtn;
     padding: 0;
-    margin: 0 1.25rem 0 0;
+    margin: 0 .75rem 0 0;
     align-items: center;
     justify-content: center;
     border: none;
@@ -74,6 +79,21 @@ $header-height: 4.25rem;
           width: 60%;
         }
       }
+    }
+  }
+
+  #header-logo {
+    height: $heightAsideBtn;
+    width: auto;
+    margin: 0 .75rem 0 0;
+  }
+
+  .header-title {
+    margin: 0;
+    font-size: 1.5rem;
+
+    @media (max-width: 767.8px) {
+      font-size: 1rem;
     }
   }
 }

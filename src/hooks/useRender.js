@@ -18,5 +18,8 @@ export default useRender = {
   },
   text: (selector, content) => {
     $(selector).text(content.toString());
+  },
+  remove: (selector) => {
+    $(selector).remove();
   }
 }

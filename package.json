@@ -1,11 +1,11 @@
 {
-  "name": "ui-web-config",
+  "name": "precision agriculture technology development",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
   "scripts": {
-    "watch": "esbuild ./src/index.js --bundle --outfile=dist/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --watch",
-    "build": "esbuild ./src/index.js --bundle --minify --outfile=build/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --sourcemap"
+    "watch": "esbuild ./src/index.js --bundle --outfile=dist/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --loader:.png=dataurl --watch",
+    "build": "esbuild ./src/index.js --bundle --minify --outfile=build/main.js --target=es6,chrome58,edge14,firefox54,safari10,opera55 --loader:.html=text --loader:.png=dataurl --sourcemap"
   },
   "author": "Hojjat Azizi",
   "license": "ISC",
