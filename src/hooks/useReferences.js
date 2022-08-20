@@ -20,6 +20,17 @@ export default useReferences = {
       $(selector).removeAttr(attribute);
     }
   },
+  class: {
+    add: (selector, value) => {
+      $(selector).addClass(value);
+    },
+    remove: (selector, value) => {
+      $(selector).removeClass(value);
+    },
+    toggle: (selector, value) => {
+      $(selector).toggleClass(value);
+    }
+  },
   css: {
     get: (selector, property) => {
       $(selector).css(property);
@@ -29,6 +40,11 @@ export default useReferences = {
     },
     setObj: (selector, multipleProperties) => {
       $(selector).css(multipleProperties);
+    }
+  },
+  window: {
+    width: () => {
+      return $(window).width();
     }
   }
 };

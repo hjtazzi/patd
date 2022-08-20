@@ -49,7 +49,9 @@ export default useEvent = {
   on: (selector, event, action) => {
     $(selector).on(
       event,
-      action(e)
+      (e) => {
+        action(e);
+      }
     );
   }
 }
