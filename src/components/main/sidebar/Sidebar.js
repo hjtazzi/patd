@@ -1,5 +1,7 @@
 import { useEvent, useReferences, useRender } from "../../../hooks";
 import tempAside from "./aside.html";
+import itemsEvent from "./itemsEvent";
+import NavMenu from "./NavMenu";
 
 export default Sidebar = () => {
   useRender.append("#collapseNavbarAside", tempAside);
@@ -9,7 +11,7 @@ export default Sidebar = () => {
   var btnAttr = "data-expanded";
   var asideBgId = "#navbar-aside-bg";
 
-  var hideSide = () => {
+  function hideSide() {
     useReferences.attr.set(btnId, btnAttr, "false");
     useReferences.class.remove(asideId, "show");
     if (useReferences.window.width() < 768) {
@@ -18,7 +20,7 @@ export default Sidebar = () => {
     }
   }
 
-  var showSide = () => {
+  function showSide() {
     useReferences.attr.set(btnId, btnAttr, "true");
     useReferences.class.add(asideId, "show");
     if (useReferences.window.width() < 768) {
@@ -50,4 +52,7 @@ export default Sidebar = () => {
   useEvent.click(asideBgId, (e) => {
     hideSide();
   });
+
+  NavMenu();
+  itemsEvent();
 }
