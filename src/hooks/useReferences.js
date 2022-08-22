@@ -40,6 +40,39 @@ export default useReferences = {
     },
     setObj: (selector, multipleProperties) => {
       $(selector).css(multipleProperties);
+    },
+    innerWidth: (selector) => {
+      return $(selector).innerWidth();
+    },
+    innerHeight: (selector) => {
+      return $(selector).innerHeight();
+    }
+  },
+  traversing: {
+    prev: (selector, filter) => {
+      return $(selector).prev(filter);
+    },
+    prevAll: (selector, filter) => {
+      return $(selector).prevAll(filter);
+    },
+    next: (selector, filter) => {
+      return $(selector).next(filter);
+    },
+    nextAll: (selector, filter) => {
+      return $(selector).nextAll(filter);
+    }
+  },
+  effect: {
+    hide: (selector) => {
+      $(selector).hide();
+    },
+    show: (selector) => {
+      $(selector).show();
+    },
+    slideToggle: (selector, completed) => {
+      $(selector).slideToggle(350, "swing", () => {
+        completed();
+      });
     }
   },
   window: {
