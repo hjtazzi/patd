@@ -1,5 +1,8 @@
 import { useRender } from "../../../hooks";
 import menuItems from "../contents/menuItems";
+import Icons from "../../icons/Icons";
+
+var chevronIcon = Icons("chevron-down");
 
 export default NavMenu = () => {
   useRender.append(".aside-content .nav-menu", `<ul class="list-menu" id="list-menu"></ul>`);
@@ -9,8 +12,8 @@ export default NavMenu = () => {
 
     var newItemMenu = `<li class="item-menu i-m-${i}">`;
     if (val.submenu.length > 1) {
-      newItemMenu += `<button class="btn item-menu-btn" data-expanded="true">${val.title}</button>`;
-      newItemMenu += `<div class="list-submenu-cont">`;
+      newItemMenu += `<button class="btn item-menu-btn" data-expanded="false">${val.title} <i>${chevronIcon}</i></button>`;
+      newItemMenu += `<div class="list-submenu-cont" style="display: none;">`;
       newItemMenu += `<ul class="list-submenu">`;
       val.submenu.map((v, j) => {
         newItemMenu += `<li class="item-submenu i-sm-${j}">`;
