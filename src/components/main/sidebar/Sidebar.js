@@ -6,10 +6,10 @@ import NavMenu from "./NavMenu";
 export default Sidebar = () => {
   useRender.append("#collapseNavbarAside", tempAside);
 
-  var asideId = "#collapseNavbarAside";
-  var btnId = "#collapseNavbarAsideBtn";
-  var btnAttr = "data-expanded";
-  var asideBgId = "#navbar-aside-bg";
+  const asideId = "#collapseNavbarAside";
+  const btnId = "#collapseNavbarAsideBtn";
+  const btnAttr = "data-expanded";
+  const asideBgId = "#navbar-aside-bg";
 
   function hideSide() {
     useReferences.attr.set(btnId, btnAttr, "false");

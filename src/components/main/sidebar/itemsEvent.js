@@ -7,9 +7,9 @@ export default itemsEvent = () => {
   useEvent.click(
     "[data-expanded=true], [data-expanded=false]",
     (e) => {
-      var target = e.target;
-      var dataExpanded = useReferences.attr.get(target, "data-expanded");
-      var listSubmenuCont = useReferences.traversing.next(target, ".list-submenu-cont");
+      const target = e.target;
+      const dataExpanded = useReferences.attr.get(target, "data-expanded");
+      const listSubmenuCont = useReferences.traversing.next(target, ".list-submenu-cont");
 
       if (dataExpanded == "false") {
         useReferences.attr.set(target, "data-expanded", "true");
@@ -22,7 +22,7 @@ export default itemsEvent = () => {
   );
 
   useEvent.click("[data-toggle=item-content]", (e) => {
-    var content = useReferences.attr.get(e.target, "data-content");
+    const content = useReferences.attr.get(e.target, "data-content");
     useReferences.class.remove("[data-toggle=item-content]", "active");
     useReferences.class.add(e.target, "active");
     Content(content);

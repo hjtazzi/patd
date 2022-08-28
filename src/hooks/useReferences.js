@@ -1,4 +1,5 @@
 import $ from "jquery";
+import queryString from "query-string";
 
 export default useReferences = {
   attr: {
@@ -78,6 +79,46 @@ export default useReferences = {
   window: {
     width: () => {
       return $(window).width();
+    }
+  },
+  forms: {
+    serialize: (selector) => {
+      return $(selector).serialize();
+    },
+    serializeArray: (selector) => {
+      return $(selector).serializeArray();
+    },
+    qsParse: (value) => {
+      return queryString.parse(value);
+    },
+    qsStringify: (valueObj) => {
+      return queryString.stringify(valueObj);
+    }
+  },
+  ajax: {
+    post: (url, data, success, error, complete) => {
+      /*
+      url: string;
+      data: string;
+      success: (res: any) => {};
+      error: (status: number; text: string) => {};
+      complete: (xhr: any) => {}
+      */
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        contentType: "application/json",
+        success: function (result) {
+          success(result);
+        },
+        error: function (xhr) {
+          error(xhr.status, xhr.statusText);
+        },
+        complete: function (xhr) {
+          complete(xhr);
+        }
+      });
     }
   }
 };

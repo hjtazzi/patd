@@ -8,8 +8,9 @@ export default Content = (content) => {
       break;
     case menuItems[0].submenu[1].content:
       AccessPoint();
+      break;
     default:
-      console.log("default");
+      Admin();
       break;
   }
 };
