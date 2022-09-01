@@ -1,6 +1,8 @@
 import $ from "jquery";
 import queryString from "query-string";
 
+const baseURL = ".";
+
 export default useReferences = {
   attr: {
     get: (selector, attribute) => {
@@ -106,9 +108,30 @@ export default useReferences = {
       */
       $.ajax({
         type: "POST",
-        url: url,
+        url: baseURL + url,
         data: data,
-        contentType: "application/json",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function (result) {
+          success(result);
+        },
+        error: function (xhr) {
+          error(xhr.status, xhr.statusText);
+        },
+        complete: function (xhr) {
+          complete(xhr);
+        }
+      });
+    },
+    get: (url, success, error, complete) => {
+      /*
+      url: string;
+      success: (res: any) => {};
+      error: (status: number; text: string) => {};
+      complete: (xhr: any) => {}
+      */
+      $.ajax({
+        type: "GET",
+        url: baseURL + url,
         success: function (result) {
           success(result);
         },
