@@ -7,7 +7,7 @@ const inps = {
   getInfoVer: "#infoVer",
   getInfoMac: "#infoMac",
   getInfoSsidName: "#infoSsidName",
-  getInfoAccessName: "#infoAccessName"///
+  getInfoAccessName: "#infoAccessName"
 };
 
 export default Info = () => {
