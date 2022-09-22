@@ -95,10 +95,26 @@ export default useReferences = {
     },
     qsStringify: (valueObj) => {
       return queryString.stringify(valueObj);
+    },
+    blockSpecial: (selector) => {
+      $(selector).bind(
+        'input',
+        function () {
+          let c = this.selectionStart;
+          const r = /[^a-zA-Z0-9.]/gi;
+          const v = $(this).val();
+
+          if (r.test(v)) {
+            $(this).val(v.replace(r, ''));
+            c--;
+          }
+          this.setSelectionRange(c, c);
+        }
+      );
     }
   },
   ajax: {
-    post: (url, data, success, error, complete) => {
+    post: (url, data, success, error, complete, timeout = 10000) => {
       /*
       url: string;
       data: string;
@@ -119,10 +135,11 @@ export default useReferences = {
         },
         complete: function (xhr) {
           complete(xhr);
-        }
+        },
+        timeout: timeout
       });
     },
-    get: (url, success, error, complete) => {
+    get: (url, success, error, complete, timeout = 10000) => {
       /*
       url: string;
       success: (res: any) => {};
@@ -140,7 +157,8 @@ export default useReferences = {
         },
         complete: function (xhr) {
           complete(xhr);
-        }
+        },
+        timeout: timeout
       });
     }
   }

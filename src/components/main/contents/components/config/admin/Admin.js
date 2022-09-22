@@ -10,12 +10,15 @@ export default Admin = () => {
   useRender.html("#main-content", tempAdmin);
   useRender.html(".icon-chevron-right", iconChevronRight);
 
+  useReferences.forms.blockSpecial("#configAdminUser");
+  useReferences.forms.blockSpecial("#configAdminPass");
+
   // load page
   useReferences.ajax.get(
     "/get-config-admin",
     (res) => {
-      // res: { getConfigAdminUser: string; getConfigAdminPass: string; }
-      let newRes = { getConfigAdminUser: "", getConfigAdminPass: "" };
+      // res: { getConfigAdminUser: string; }
+      let newRes = { getConfigAdminUser: "" };
 
       if (typeof res === "string") {
         newRes = useReferences.forms.qsParse(res);
@@ -23,9 +26,8 @@ export default Admin = () => {
         newRes = res;
       }
 
-      if (newRes.getConfigAdminUser && newRes.getConfigAdminPass) {
+      if (newRes.getConfigAdminUser) {
         useReferences.attr.set("#configAdminUser", "value", newRes.getConfigAdminUser);
-        useReferences.attr.set("#configAdminPass", "value", newRes.getConfigAdminPass);
       }
 
     },
@@ -46,26 +48,30 @@ export default Admin = () => {
       const formValues = useReferences.forms.serialize(e.target);
       const valuesPars = useReferences.forms.qsParse(formValues);
 
-      if (!valuesPars.configAdminUser || !valuesPars.configAdminPass) {
+      if (!valuesPars.configAdminUser || !valuesPars.configAdminPass || !valuesPars.configAdminConfPass) {
         setAlertErr("مقادیر وارد شده صحیح نمیباشد");
       } else {
-        if (valuesPars.configAdminPass.length < 8) {
-          setAlertErr("رمز عبور نمیتواند کمتر از 8 کارکتر باشد");
+        if (valuesPars.configAdminUser.length < 4 || valuesPars.configAdminPass.length < 4 || valuesPars.configAdminConfPass.length < 4) {
+          setAlertErr("مقادیر وارد شده نمیتواند کمتر از 4 کارکتر باشد");
         } else {
-          useReferences.effect.show("#loading");
-          useReferences.ajax.post(
-            "/config-admin",
-            formValues,
-            (res) => {
-              setAlertScs("عملیات با موفقیت انجام شد");
-            },
-            (statusCode, errText) => {
-              setAlertErr(`${statusCode}: ${errText}`);
-            },
-            () => {
-              useReferences.effect.hide("#loading");
-            }
-          );
+          if (valuesPars.configAdminPass !== valuesPars.configAdminConfPass) {
+            setAlertErr("رمز عبور و تایید رمز عبور برابر نیست");
+          } else {
+            useReferences.effect.show("#loading");
+            useReferences.ajax.post(
+              "/config-admin",
+              formValues,
+              (res) => {
+                setAlertScs("عملیات با موفقیت انجام شد");
+              },
+              (statusCode, errText) => {
+                setAlertErr(`${statusCode}: ${errText}`);
+              },
+              () => {
+                useReferences.effect.hide("#loading");
+              }
+            );
+          }
         }
       }
     }

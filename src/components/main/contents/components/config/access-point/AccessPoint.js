@@ -10,6 +10,9 @@ export default AccessPoint = () => {
   useRender.html("#main-content", tempAccess);
   useRender.html(".icon-chevron-right", iconChevronRight);
 
+  useReferences.forms.blockSpecial("#configAccessName");
+  useReferences.forms.blockSpecial("#configAccessPass");
+
   // load page
   useReferences.ajax.get(
     "/get-config-access",
@@ -49,7 +52,9 @@ export default AccessPoint = () => {
       if (!valuesPars.configAccessName || !valuesPars.configAccessPass) {
         setAlertErr("مقادیر وارد شده صحیح نمیباشد");
       } else {
-        if (valuesPars.configAccessPass.length < 8) {
+        if (valuesPars.configAccessName.length < 3) {
+          setAlertErr("نام نمیتواند کمتر از 3 کارکتر باشد");
+        } else if (valuesPars.configAccessPass.length < 8) {
           setAlertErr("رمز عبور نمیتواند کمتر از 8 کارکتر باشد");
         } else {
           useReferences.effect.show("#loading");

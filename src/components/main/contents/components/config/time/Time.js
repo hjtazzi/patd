@@ -14,8 +14,14 @@ export default Time = () => {
   useReferences.ajax.get(
     "/get-config-time",
     (res) => {
-      // res: string[];
-      let newRes = [];
+      /*res: {
+        ntpServers: string[];
+        timezones: string[];
+      };*/
+      let newRes = {
+        ntpServers: [],
+        timezones: []
+      };
 
       if (typeof res === "string") {
         newRes = JSON.parse(res);
@@ -23,9 +29,15 @@ export default Time = () => {
         newRes = res;
       }
 
-      if (newRes.length > 0) {
-        newRes.map((val) => {
-          useRender.prepend("#configTimeNtp", `<option value="${val}">${val}</option>`);
+      if (newRes.ntpServers.length > 0) {
+        newRes.ntpServers.map((val) => {
+          useRender.append("#configTimeNtp", `<option value="${val}">${val}</option>`);
+        });
+      }
+
+      if (newRes.timezones.length > 0) {
+        newRes.timezones.map((val) => {
+          useRender.append("#configTimeTimezone", `<option value="${val}">${val}</option>`);
         });
       }
     },

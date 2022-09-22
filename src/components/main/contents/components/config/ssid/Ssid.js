@@ -10,24 +10,32 @@ export default Ssid = () => {
   useRender.html("#main-content", tempSsid);
   useRender.html(".icon-chevron-right", iconChevronRight);
 
+  useReferences.forms.blockSpecial("#configSsidName");
+  useReferences.forms.blockSpecial("#configSsidPass");
+
+  const appendNames = (res) => {
+    let newRes = [];
+
+    if (typeof res === "string") {
+      newRes = JSON.parse(res);
+    } else if (typeof res === "object") {
+      newRes = res;
+    }
+
+    if (newRes.length > 0) {
+      useRender.html("#configSsidNames", `<option value="other" selected>other</option>`)
+      newRes.map((val) => {
+        useRender.append("#configSsidNames", `<option value="${val}">${val}</option>`);
+      });
+    }
+  }
+
   // load page
   useReferences.ajax.get(
     "/get-config-ssid",
     (res) => {
       // res: string[];
-      let newRes = [];
-
-      if (typeof res === "string") {
-        newRes = JSON.parse(res);
-      } else if (typeof res === "object") {
-        newRes = res;
-      }
-
-      if (newRes.length > 0) {
-        newRes.map((val) => {
-          useRender.prepend("#confirmSsidNames", `<option value="${val}">${val}</option>`);
-        });
-      }
+      appendNames(res);
     },
     (statusCode, errText) => {
       setAlertErr(`${statusCode}: ${errText}`);
@@ -37,21 +45,38 @@ export default Ssid = () => {
     }
   );
 
-  // change confirmSsidNames select
+  // refresh Names list
+  const timeout = 3000;
+
+  const namesInterval = setInterval(() => {
+    const thisContent = document.getElementById("config-ssid-content");
+    if (thisContent) {
+      useReferences.ajax.get(
+        "/get-config-ssid",
+        (res) => {
+          // res: string[];
+          appendNames(res);
+        },
+        () => { },
+        () => { },
+        timeout
+      );
+    } else {
+      clearInterval(namesInterval);
+    }
+  }, timeout);
+
+  // change configSsidNames select
   useEvent.on(
-    "#confirmSsidNames",
+    "#configSsidNames",
     "change",
     (e) => {
       const thisVal = e.target.value;
-      const inpName = "#confirmSsidName";
-      const inpPass = "#confirmSsidPass";
 
       if (thisVal === "other") {
-        useReferences.attr.remove(inpName, "disabled");
-        useReferences.attr.remove(inpPass, "disabled");
+        useReferences.attr.remove("#configSsidName", "disabled");
       } else {
-        useReferences.attr.set(inpName, "disabled", "disabled");
-        useReferences.attr.set(inpPass, "disabled", "disabled");
+        useReferences.attr.set("#configSsidName", "disabled", "disabled");
       }
     }
   )
@@ -82,18 +107,30 @@ export default Ssid = () => {
         );
       }
 
-      if (valuesPars.confirmSsidNames === "other") {
-        if (!valuesPars.confirmSsidName || !valuesPars.confirmSsidPass) {
-          setAlertErr("مقادیر وارد شده صحیح نمیباشد");
-        } else {
-          if (valuesPars.confirmSsidPass.length < 8) {
-            setAlertErr("رمز عبور نمیتواند کمتر از 8 کارکتر باشد");
+      if (valuesPars.configSsidNames) {
+        if (valuesPars.configSsidNames === "other") {
+          if (!valuesPars.configSsidName || !valuesPars.configSsidPass) {
+            setAlertErr("مقادیر وارد شده صحیح نمیباشد");
           } else {
-            req();
+            if (valuesPars.configSsidName.length < 3) {
+              setAlertErr("نام نمیتواند کمتر از 3 کارکتر باشد");
+            } else if (valuesPars.configSsidPass.length < 8) {
+              setAlertErr("رمز عبور نمیتواند کمتر از 8 کارکتر باشد");
+            } else {
+              req();
+            }
+          }
+        } else {
+          if (!valuesPars.configSsidPass) {
+            setAlertErr("مقادیر وارد شده صحیح نمیباشد");
+          } else {
+            if (valuesPars.configSsidPass.length < 8) {
+              setAlertErr("رمز عبور نمیتواند کمتر از 8 کارکتر باشد");
+            } else {
+              req();
+            }
           }
         }
-      } else {
-        req();
       }
     }
   );

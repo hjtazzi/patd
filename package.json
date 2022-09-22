@@ -2,7 +2,7 @@
   "name": "precision-agriculture-technology-development",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
     "watch": "esbuild ./src/index.js --bundle --outfile=dist/main.js --target=es6,chrome58,edge18,firefox54,safari11,opera55 --loader:.html=text --loader:.png=dataurl --watch",
     "build": "esbuild ./src/index.js --bundle --minify --outfile=build/main.js --target=es6,chrome58,edge18,firefox54,safari11,opera55 --loader:.html=text --loader:.png=dataurl --sourcemap"
@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "jquery": "^3.6.0",
-    "query-string": "^7.1.1"
+    "query-string": "^7.1.1",
+    "timestamp-to-date": "^1.1.0"
   },
   "devDependencies": {
     "esbuild": "0.15.5"
