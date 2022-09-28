@@ -1,4 +1,4 @@
-import { Info, Admin, Ssid, AccessPoint, Mqtt, Time, View } from "./components";
+import { Info, Admin, Ssid, AccessPoint, Mqtt, Time, Data, Log } from "./components";
 import menuItems from "./menuItems";
 
 export default Content = (content) => {
@@ -22,10 +22,10 @@ export default Content = (content) => {
       Time();
       break;
     case menuItems[2].submenu[0].content:
-      View();
+      Data();
       break;
     case menuItems[2].submenu[1].content:
-      View();
+      Log();
       break;
     default:
       Info();

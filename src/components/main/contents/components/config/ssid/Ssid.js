@@ -4,6 +4,7 @@ import { setAlertErr, setAlertScs } from "../../setAlerts";
 import tempSsid from "./ssid.html";
 
 const iconChevronRight = Icons("chevron-right");
+let ssidRes = null;
 
 export default Ssid = () => {
   useReferences.effect.show("#loading");
@@ -35,6 +36,7 @@ export default Ssid = () => {
     "/get-config-ssid",
     (res) => {
       // res: string[];
+      ssidRes = res;
       appendNames(res);
     },
     (statusCode, errText) => {
@@ -55,7 +57,10 @@ export default Ssid = () => {
         "/get-config-ssid",
         (res) => {
           // res: string[];
-          appendNames(res);
+          if (res !== ssidRes) {
+            ssidRes = res;
+            appendNames(res);
+          }
         },
         () => { },
         () => { },

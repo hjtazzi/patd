@@ -4,7 +4,8 @@ import Ssid from "./config/ssid/Ssid";
 import AccessPoint from "./config/access-point/AccessPoint";
 import Mqtt from "./config/mqtt/Mqtt";
 import Time from "./config/time/Time";
-import View from "./view/View";
+import Data from "./view/data/Data";
+import Log from "./view/log/Log";
 
 export {
   Info,
@@ -13,5 +14,6 @@ export {
   AccessPoint,
   Mqtt,
   Time,
-  View
+  Data,
+  Log
 }
