@@ -121,6 +121,7 @@ export default useReferences = {
       success: (res: any) => {};
       error: (status: number; text: string) => {};
       complete: (xhr: any) => {}
+      timeout?: number;
       */
       $.ajax({
         type: "POST",
@@ -145,6 +146,7 @@ export default useReferences = {
       success: (res: any) => {};
       error: (status: number; text: string) => {};
       complete: (xhr: any) => {}
+      timeout?: number;
       */
       $.ajax({
         type: "GET",

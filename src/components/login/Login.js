@@ -1,8 +1,7 @@
 import { useRender, useReferences, useEvent } from "../../hooks";
-import Header from "../header/Header";
-
-import Alerts from "../alerts/Alerts";
 import tempLogin from "./login.html";
+import Alerts from "../alerts/Alerts";
+import Header from "../header/Header";
 import Main from "../main/Main";
 
 const alertErr = Alerts("error");
@@ -36,7 +35,6 @@ export default Login = () => {
             (res) => {
               // load app
               useRender.html("#root", "");
-              sessionStorage.setItem("login", "true");
               Header();
               Main();
             },

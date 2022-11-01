@@ -8,7 +8,12 @@ export default NavMenu = () => {
   useRender.append(".aside-content .nav-menu", `<ul class="list-menu" id="list-menu"></ul>`);
 
   menuItems.map((val, i) => {
-    // val: {title, submenu: {title, content}[]}
+    /*
+    val: {
+      title: string,
+      submenu: {title: string, content: string}[]
+    }
+    */
 
     let newItemMenu = `<li class="item-menu i-m-${i}">`;
     if (val.submenu.length > 1) {
