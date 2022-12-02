@@ -41,7 +41,11 @@ export default Log = () => {
   useReferences.ajax.get(
     "/get-view-log",
     (res) => {
-      // res: { date: string; event: string; value: string; }[]
+      /* res: {
+        date: string;
+        event: string;
+        value: string;
+      }[] */
       logsRes = res;
       setLogs(res);
     },
@@ -62,7 +66,6 @@ export default Log = () => {
       useReferences.ajax.get(
         "/get-view-log",
         (res) => {
-          // res: { date: string; event: string; value: string; }[]
           if (res !== logsRes) {
             logsRes = res;
             setLogs(res);

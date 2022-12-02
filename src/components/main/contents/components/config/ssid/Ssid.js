@@ -23,8 +23,8 @@ export default Ssid = () => {
       newRes = res;
     }
 
+    useRender.html("#configSsidNames", `<option value="other" selected>other</option>`);
     if (newRes.length > 0) {
-      useRender.html("#configSsidNames", `<option value="other" selected>other</option>`)
       newRes.map((val) => {
         useRender.append("#configSsidNames", `<option value="${val}">${val}</option>`);
       });

@@ -17,7 +17,10 @@ export default AccessPoint = () => {
   useReferences.ajax.get(
     "/get-config-access",
     (res) => {
-      // res: { getConfigAccessName: string; getConfigAccessPass: string; }
+      /* res: {
+        getConfigAccessName: string;
+        getConfigAccessPass: string;
+      } */
       let newRes = { getConfigAccessName: "", getConfigAccessPass: "" };
 
       if (typeof res === "string") {

@@ -14,10 +14,10 @@ export default Time = () => {
   useReferences.ajax.get(
     "/get-config-time",
     (res) => {
-      /*res: {
+      /* res: {
         ntpServers: string[];
         timezones: string[];
-      };*/
+      } */
       let newRes = {
         ntpServers: [],
         timezones: []
